@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Login.css">
+</head>
+<body>
+<div id="particles-js"></div>
+<div class="wrapper">
+    <form id="loginForm">
+        <h1>FlashLearn</h1>
+        <div class="form-group input-box">
+            <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
+            <p class="error" id="emailError"></p>
+        </div>
+        <div class="form-group input-box">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <p class="error" id="passwordError"></p>
+        </div>
+        <div class="form-group form-check remember-forgot d-flex justify-content-between align-items-center">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" id="rememberMe"> Remember me
+            </label>
+            <p><a href="/forgot-password">Forgot Password?</a></p>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+        <div class="text-center mt-3 register-link">
+            <p>Don't have an account? <a href="/RegisterForm">Register</a></p>
+        </div>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+
+    function loadParticlesConfig() {
+        fetch('particle-cfg.json')
+            .then(response => response.json())
+            .then(config => {
+                particlesJS('particles-js', config);
+            })
+            .catch(error => console.error('Error loading particles config:', error));
+    }
+
+    document.addEventListener('DOMContentLoaded', loadParticlesConfig);
+</script>
+<script src="LoginForm.js"></script>
+</body>
+</html>
