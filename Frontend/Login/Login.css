@@ -134,3 +134,8 @@ body, html {
 .register-link p a:hover{
     text-decoration: underline;
 }
+.remember-forgot .form-check-input{
+    margin-left: 100px;
+}
+
+
