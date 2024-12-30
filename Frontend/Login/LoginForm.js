@@ -19,6 +19,8 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         .then(response => response.json())
         .then(data => {
             if (data.message === "Success") {
+                localStorage.setItem('userId', data.userId);
+
                 window.location.href = '/Flash-Learn/Frontend/MainPage/MainPage.html';
             } else {
                 alert('Błędny e-mail lub hasło. Spróbuj ponownie.');

@@ -5,24 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="MainPage.css">
 </head>
 <body>
 <div id="particles-js"></div>
 <header>
-    <div class="logo">FlashLearn</div>
+    <div class="logo"><a href="../MainPage/MainPage.html"> FlashLearn</a></div>
     <nav>
         <ul class="nav_links">
-            <li><a href="../MainPage/MainPage.html">Home</a></li>
-            <li><a href="#" id="add-folder-btn">Add Folder</a></li>
-            <li><a href="#">Edit Folder</a></li>
-            <li><a href="#">Delete Folder</a></li>
+            <li><a href="../MainPage/MainPage.html"><i class="bi bi-house"></i>  Home</a></li>
+            <li><a href="#" id="add-folder-btn"><i class="bi bi-folder-plus"></i>  Add Folder</a></li>
+            <li><a href="#"><i class="bi bi-pencil-square"></i>  Edit Folder</a></li>
+            <li><a href="#"><i class="bi bi-trash3"></i>  Delete Folder</a></li>
         </ul>
     </nav>
-    <button id="logout-button" class="buttons">Log-Out</button>
+    <button id="logout-button" class="buttons"> Log Out  <i class="bi bi-box-arrow-right"></i> </button>
+
 </header>
 
-<!-- Modal for Folder Creation -->
 <div class="modal fade" id="folderModal" tabindex="-1" aria-labelledby="folderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -39,7 +41,7 @@
                         <input type="text" class="form-control" id="folder-name" placeholder="Enter folder name">
                     </div>
                     <div class="form-group">
-                        <label for="folder-color">Select Folder Color</label>
+                        <label id="folder-color">Select Folder Color</label>
                         <div id="color-picker">
                             <div class="color-option" style="background-color: #FF5733;" data-color="#FF5733"></div>
                             <div class="color-option" style="background-color: #33FF57;" data-color="#33FF57"></div>
@@ -58,6 +60,9 @@
         </div>
     </div>
 </div>
+<footer>
+    <p>&copy; 2024 Piotr Klocek</p>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

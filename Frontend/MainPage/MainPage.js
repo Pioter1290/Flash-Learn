@@ -32,8 +32,34 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("save-folder-btn").addEventListener("click", function() {
         var folderName = document.getElementById("folder-name").value;
         var folderColor = document.getElementById("folder-color").value;
-        alert("Folder created with name: " + folderName + " and color: " + folderColor);
-        $('#folderModal').modal('hide');
+
+        var userId = localStorage.getItem('userId');
+
+        if (!userId) {
+            alert("Nie uzyskano userId.");
+            return;
+        }
+
+        fetch('http://localhost:8081/add-folder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: folderName,
+                color: folderColor,
+                userId: userId
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert("Folder created successfully!");
+                $('#folderModal').modal('hide');
+            })
+            .catch(error => {
+                console.error("Error adding folder:", error);
+                alert("There was an error adding the folder.");
+            });
     });
 
     const colorOptions = document.querySelectorAll('.color-option');

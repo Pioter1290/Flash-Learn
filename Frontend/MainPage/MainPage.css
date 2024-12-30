@@ -3,13 +3,16 @@
     margin: 0;
     padding: 0;
 }
-
 body, html {
-    background: #3a9abd;
+    background: linear-gradient(to bottom, #4cc2ef, #006a91);
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
+
 
 #particles-js {
     position: absolute;
@@ -20,7 +23,7 @@ body, html {
 }
 
 header {
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     justify-content: start;
     display: flex;
@@ -35,12 +38,19 @@ header {
 
 .logo {
     color: white;
-    font-size: 35px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-size: 30px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
     margin-right: auto;
     margin-left: 10px !important;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
 }
-
+.logo a{
+    color: white;
+}
+.logo a:hover{
+    text-decoration: none;
+}
 
 .nav_links {
     list-style: none;
@@ -76,7 +86,7 @@ header {
 .buttons {
     width: 10%;
     height: 40px;
-    background: #fff;
+    background: #ffffff;
     border: none;
     outline: none;
     border-radius: 40px;
@@ -87,16 +97,20 @@ header {
     font-weight: 700;
     transition: box-shadow 0.3s, background-color 0.3s, color 0.3s;
     position: absolute;
-    top: 10px;
+    top: 3px;
     right: 0;
     margin: 10px;
+}
+.icon-large {
+    font-weight: bold;
 }
 
 .buttons:hover{
     box-shadow: 0 0 10px rgba(0, 0, 0, .6);
-    background-color: #4343ff;
+    background-color: #00b0ff;
     color: white;
 }
+
 .color-option {
     width: 30px;
     height: 30px;
@@ -113,4 +127,26 @@ header {
 
 .selected {
     border: 2px solid black;
+}
+
+.footer-wrapper {
+    flex: 1;
+    flex-shrink: 0;
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    color: white;
+    height: 60px;
+    text-align: center;
+    padding: 1em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-top: auto;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
