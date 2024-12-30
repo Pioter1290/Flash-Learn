@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="MainPage.css">
+</head>
+<body>
+<div id="particles-js"></div>
+<header>
+    <div class="logo">FlashLearn</div>
+    <nav>
+        <ul class="nav_links">
+            <li><a href="../MainPage/MainPage.html">Home</a></li>
+            <li><a href="#" id="add-folder-btn">Add Folder</a></li>
+            <li><a href="#">Edit Folder</a></li>
+            <li><a href="#">Delete Folder</a></li>
+        </ul>
+    </nav>
+    <button id="logout-button" class="buttons">Log-Out</button>
+</header>
+
+<!-- Modal for Folder Creation -->
+<div class="modal fade" id="folderModal" tabindex="-1" aria-labelledby="folderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="folderModalLabel">Add New Folder</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="folderForm">
+                    <div class="form-group">
+                        <label for="folder-name">Folder Name</label>
+                        <input type="text" class="form-control" id="folder-name" placeholder="Enter folder name">
+                    </div>
+                    <div class="form-group">
+                        <label for="folder-color">Select Folder Color</label>
+                        <div id="color-picker">
+                            <div class="color-option" style="background-color: #FF5733;" data-color="#FF5733"></div>
+                            <div class="color-option" style="background-color: #33FF57;" data-color="#33FF57"></div>
+                            <div class="color-option" style="background-color: #3357FF;" data-color="#3357FF"></div>
+                            <div class="color-option" style="background-color: #FF33A1;" data-color="#FF33A1"></div>
+                            <div class="color-option" style="background-color: #FFFF33;" data-color="#FFFF33"></div>
+                            <div class="color-option" style="background-color: #33FFFF;" data-color="#33FFFF"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-folder-btn">Save Folder</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script src="MainPage.js"></script>
+
+</body>
+</html>
