@@ -15,51 +15,53 @@
     <div class="logo"><a href="../MainPage/MainPage.html"> FlashLearn</a></div>
     <nav>
         <ul class="nav_links">
-            <li><a href="../MainPage/MainPage.html"><i class="bi bi-house"></i>  Home</a></li>
-            <li><a href="#" id="add-folder-btn"><i class="bi bi-folder-plus"></i>  Add Folder</a></li>
-            <li><a href="#"><i class="bi bi-pencil-square"></i>  Edit Folder</a></li>
-            <li><a href="#"><i class="bi bi-trash3"></i>  Delete Folder</a></li>
+            <li><a href="../MainPage/MainPage.html"><i class="bi bi-house"></i> Home</a></li>
+            <li><a href="#" id="add-folder-btn"><i class="bi bi-folder-plus"></i> Add Folder</a></li>
+            <li><a href="#"><i class="bi bi-pencil-square"></i> Edit Folder</a></li>
+            <li><a href="#"><i class="bi bi-trash3"></i> Delete Folder</a></li>
         </ul>
     </nav>
-    <button id="logout-button" class="buttons"> Log Out  <i class="bi bi-box-arrow-right"></i> </button>
-
+    <button id="logout-button" class="buttons"> Log Out <i class="bi bi-box-arrow-right"></i> </button>
 </header>
 
-<div class="modal fade" id="folderModal" tabindex="-1" aria-labelledby="folderModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="folderModalLabel">Add New Folder</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="folderForm">
-                    <div class="form-group">
-                        <label for="folder-name">Folder Name</label>
-                        <input type="text" class="form-control" id="folder-name" placeholder="Enter folder name">
-                    </div>
-                    <div class="form-group">
-                        <label id="folder-color">Select Folder Color</label>
-                        <div id="color-picker">
-                            <div class="color-option" style="background-color: #FF5733;" data-color="#FF5733"></div>
-                            <div class="color-option" style="background-color: #33FF57;" data-color="#33FF57"></div>
-                            <div class="color-option" style="background-color: #3357FF;" data-color="#3357FF"></div>
-                            <div class="color-option" style="background-color: #FF33A1;" data-color="#FF33A1"></div>
-                            <div class="color-option" style="background-color: #FFFF33;" data-color="#FFFF33"></div>
-                            <div class="color-option" style="background-color: #33FFFF;" data-color="#33FFFF"></div>
+<div id="content">
+    <div class="modal fade" id="folderModal" tabindex="-1" aria-labelledby="folderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="folderModalLabel">Add New Folder</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="folderForm">
+                        <div class="form-group">
+                            <label for="folder-name">Folder Name</label>
+                            <input type="text" class="form-control" id="folder-name" placeholder="Enter folder name">
                         </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="save-folder-btn">Save Folder</button>
+                        <div class="form-group">
+                            <label id="folder-color">Select Folder Color</label>
+                            <div id="color-picker">
+                                <div class="color-option" style="background-color: #FF5733;" data-color="#FF5733"></div>
+                                <div class="color-option" style="background-color: #33FF57;" data-color="#33FF57"></div>
+                                <div class="color-option" style="background-color: #3357FF;" data-color="#3357FF"></div>
+                                <div class="color-option" style="background-color: #FF33A1;" data-color="#FF33A1"></div>
+                                <div class="color-option" style="background-color: #FFFF33;" data-color="#FFFF33"></div>
+                                <div class="color-option" style="background-color: #33FFFF;" data-color="#33FFFF"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-folder-btn">Save Folder</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <footer>
     <p>&copy; 2024 Piotr Klocek</p>
 </footer>
@@ -70,6 +72,5 @@
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script src="MainPage.js"></script>
-
 </body>
 </html>

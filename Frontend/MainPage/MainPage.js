@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById("save-folder-btn").addEventListener("click", function() {
         var folderName = document.getElementById("folder-name").value;
+
         var folderColor = document.getElementById("folder-color").value;
 
         var userId = localStorage.getItem('userId');
@@ -53,8 +54,22 @@ document.addEventListener('DOMContentLoaded', function() {
         })
             .then(response => response.json())
             .then(data => {
-                alert("Folder created successfully!");
                 $('#folderModal').modal('hide');
+                const newFolder = document.createElement("div");
+                newFolder.classList.add("new-folder");
+
+                const folderText = document.createElement("div");
+                folderText.classList.add("folder-text");
+                folderText.textContent = folderName;
+
+                const smallRectangle = document.createElement("div");
+                smallRectangle.classList.add("small-rectangle");
+                smallRectangle.style.backgroundColor = folderColor;
+
+                newFolder.appendChild(folderText);
+                newFolder.appendChild(smallRectangle);
+
+                document.getElementById("content").appendChild(newFolder);
             })
             .catch(error => {
                 console.error("Error adding folder:", error);
@@ -77,4 +92,34 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('folder-color').value = selectedColor;
         });
     });
+
+    function loadUserFolders() {
+        var userId = localStorage.getItem('userId');
+        if (!userId) {
+            console.error("Nie uzyskano userId.");
+            return;
+        }
+        fetch(`http://localhost:8081/folders?userId=${userId}`)
+            .then(response => response.json())
+            .then(folders => {
+                folders.forEach(folder => {
+                    const newFolder = document.createElement("div");
+                    newFolder.classList.add("new-folder");
+
+                    const smallRectangle = document.createElement("div");
+                    smallRectangle.classList.add("small-rectangle");
+                    smallRectangle.style.backgroundColor = folder.folder_color;
+
+                    newFolder.appendChild(smallRectangle);
+                    newFolder.appendChild(document.createTextNode(folder.folder_name));
+
+                    document.getElementById("content").appendChild(newFolder);
+                });
+            })
+            .catch(error => {
+                console.error("Error loading folders:", error);
+            });
+    }
+
+    loadUserFolders();
 });
