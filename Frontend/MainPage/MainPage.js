@@ -11,21 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
     loadParticlesConfig();
 
     document.getElementById('logout-button').addEventListener('click', function() {
-
         const confirmLogout = confirm("Czy na pewno chcesz się wylogować?");
-
         if (confirmLogout) {
             sessionStorage.clear();
             localStorage.clear();
             window.location.href = '../Login/loginForm.html';
         } else {
-
             console.log("Wylogowanie anulowane.");
         }
     });
 
     document.getElementById("edit-folder-btn").addEventListener("click", function () {
-
         loadUserFoldersForEdit();
         $('#editFolderModal').modal('show');
     });
@@ -33,16 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("add-folder-btn").addEventListener("click", function() {
         $('#folderModal').modal('show');
     });
-    document.getElementById("save-folder-btn").addEventListener("click", function() {
-        var folderName = document.getElementById("folder-name").value;
 
+    document.getElementById("delete-folder-btn").addEventListener("click", function() {
+        loadUserFoldersForDelete();
+        $('#deleteFolderModal').modal('show');
     });
 
     document.getElementById("save-folder-btn").addEventListener("click", function() {
         var folderName = document.getElementById("folder-name").value;
-
         var folderColor = document.getElementById("folder-color").value;
-
         var userId = localStorage.getItem('userId');
 
         if (!userId) {
@@ -85,10 +80,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("There was an error adding the folder.");
             });
     });
+
     document.getElementById("edit-save-folder-btn").addEventListener("click", function() {
         var folderId = document.getElementById("edit-folder-select").value;
         var folderName = document.getElementById("edit-folder-name").value;
-        var folderColor = document.querySelector('.color-option.selected').getAttribute('data-color'); // Pobierz wybrany kolor
+        var folderColor = document.querySelector('.color-option.selected').getAttribute('data-color');
 
         if (!folderId) {
             alert("Please select a folder to edit.");
@@ -117,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 $('#editFolderModal').modal('hide');
-
                 location.reload();
             })
             .catch(error => {
@@ -126,18 +121,36 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 
+    document.getElementById("confirm-delete-folder-btn").addEventListener("click", function() {
+        var folderId = document.getElementById("delete-folder-select").value;
+
+        if (!folderId) {
+            alert("Please select a folder to delete.");
+            return;
+        }
+
+        fetch(`http://localhost:8081/delete-folder/${folderId}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(data => {
+                $('#deleteFolderModal').modal('hide');
+                location.reload();
+            })
+            .catch(error => {
+                console.error("Error deleting folder:", error);
+                alert("There was an error deleting the folder.");
+            });
+    });
+
     const colorOptions = document.querySelectorAll('.color-option');
 
     colorOptions.forEach(option => {
         option.addEventListener('click', function() {
-
             colorOptions.forEach(opt => opt.classList.remove('selected'));
-
             this.classList.add('selected');
-
             const selectedColor = this.getAttribute('data-color');
             console.log("Selected Color: " + selectedColor);
-
             document.getElementById('folder-color').value = selectedColor;
         });
     });
@@ -169,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error("Error loading folders:", error);
             });
     }
+
     function loadUserFoldersForEdit() {
         var userId = localStorage.getItem('userId');
         if (!userId) {
@@ -185,6 +199,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     option.value = folder.folder_id;
                     option.textContent = folder.folder_name;
                     editFolderSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error("Error loading folders:", error);
+            });
+    }
+
+    function loadUserFoldersForDelete() {
+        var userId = localStorage.getItem('userId');
+        if (!userId) {
+            console.error("Nie uzyskano userId.");
+            return;
+        }
+        fetch(`http://localhost:8081/folders?userId=${userId}`)
+            .then(response => response.json())
+            .then(folders => {
+                const deleteFolderSelect = document.getElementById("delete-folder-select");
+                deleteFolderSelect.innerHTML = '<option>Select a folder</option>';
+                folders.forEach(folder => {
+                    const option = document.createElement("option");
+                    option.value = folder.folder_id;
+                    option.textContent = folder.folder_name;
+                    deleteFolderSelect.appendChild(option);
                 });
             })
             .catch(error => {
