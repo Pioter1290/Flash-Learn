@@ -84,6 +84,33 @@ app.post('/add-folder', (req, res) => {
     });
 });
 
+app.post('/edit-folder', (req, res) => {
+    console.log("Received folder update data:", req.body);
+
+    const { folderId, name, color } = req.body;
+
+    if (!userId) {
+        return res.status(403).json({ error: "User not authenticated" });
+    }
+
+    const sql = "UPDATE app_folders SET folder_name = ?, folder_color = ? WHERE folder_id = ? AND user_id = ?";
+    const values = [name, color, folderId, userId];
+
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.error("Error executing query:", err);
+            return res.status(500).json({ error: "Database error" });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Folder not found or user not authorized" });
+        }
+
+        res.status(200).json({ message: "Folder updated successfully" });
+    });
+});
+
+
 app.post('/logout', (req, res) => {
     userId = null;
     res.json({ message: "Logout successful" });

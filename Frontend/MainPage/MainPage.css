@@ -176,7 +176,7 @@ footer {
     border: 1px solid #ddd;
     border-radius: 10px;
     box-sizing: border-box;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .8);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -190,6 +190,10 @@ footer {
     text-overflow: ellipsis;
     word-wrap: break-word;
 
+}
+.new-folder:hover{
+    box-shadow: 0 0 20px rgba(0, 0, 0, .9);
+    backdrop-filter: blur(1px);
 }
 
 .new-folder text{

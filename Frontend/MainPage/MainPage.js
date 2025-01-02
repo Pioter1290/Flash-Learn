@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    document.getElementById("edit-folder-btn").addEventListener("click", function () {
+
+        loadUserFoldersForEdit();
+        $('#editFolderModal').modal('show');
+    });
+
     document.getElementById("add-folder-btn").addEventListener("click", function() {
         $('#folderModal').modal('show');
     });
@@ -76,6 +82,46 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("There was an error adding the folder.");
             });
     });
+    document.getElementById("edit-save-folder-btn").addEventListener("click", function() {
+        var folderId = document.getElementById("edit-folder-select").value;
+        var folderName = document.getElementById("edit-folder-name").value;
+        var folderColor = document.querySelector('.color-option.selected').getAttribute('data-color'); // Pobierz wybrany kolor
+
+        if (!folderId) {
+            alert("Please select a folder to edit.");
+            return;
+        }
+
+        var userId = localStorage.getItem('userId');
+
+        if (!userId) {
+            alert("Nie uzyskano userId.");
+            return;
+        }
+
+        fetch('http://localhost:8081/edit-folder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                folderId: folderId,
+                name: folderName,
+                color: folderColor,
+                userId: userId
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                $('#editFolderModal').modal('hide');
+
+                location.reload();
+            })
+            .catch(error => {
+                console.error("Error editing folder:", error);
+                alert("There was an error editing the folder.");
+            });
+    });
 
     const colorOptions = document.querySelectorAll('.color-option');
 
@@ -114,6 +160,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     newFolder.appendChild(document.createTextNode(folder.folder_name));
 
                     document.getElementById("content").appendChild(newFolder);
+                });
+            })
+            .catch(error => {
+                console.error("Error loading folders:", error);
+            });
+    }
+    function loadUserFoldersForEdit() {
+        var userId = localStorage.getItem('userId');
+        if (!userId) {
+            console.error("Nie uzyskano userId.");
+            return;
+        }
+        fetch(`http://localhost:8081/folders?userId=${userId}`)
+            .then(response => response.json())
+            .then(folders => {
+                const editFolderSelect = document.getElementById("edit-folder-select");
+                editFolderSelect.innerHTML = '<option value="" disabled selected>Select a folder</option>';
+                folders.forEach(folder => {
+                    const option = document.createElement("option");
+                    option.value = folder.folder_id;
+                    option.textContent = folder.folder_name;
+                    editFolderSelect.appendChild(option);
                 });
             })
             .catch(error => {

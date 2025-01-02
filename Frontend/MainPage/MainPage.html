@@ -17,7 +17,7 @@
         <ul class="nav_links">
             <li><a href="../MainPage/MainPage.html"><i class="bi bi-house"></i> Home</a></li>
             <li><a href="#" id="add-folder-btn"><i class="bi bi-folder-plus"></i> Add Folder</a></li>
-            <li><a href="#"><i class="bi bi-pencil-square"></i> Edit Folder</a></li>
+            <li><a href="#" id="edit-folder-btn"><i class="bi bi-pencil-square"></i> Edit Folder</a></li>
             <li><a href="#"><i class="bi bi-trash3"></i> Delete Folder</a></li>
         </ul>
     </nav>
@@ -56,6 +56,49 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="save-folder-btn">Save Folder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="editFolderModal" tabindex="-1" aria-labelledby="editFolderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editFolderModalLabel">Edit Folder</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editFolderForm">
+                        <div class="form-group">
+                            <label for="edit-folder-select">Select Folder to Edit</label>
+                            <select class="form-control" id="edit-folder-select">
+                                <option value="" disabled selected>Select a folder</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-folder-name">Enter New Folder Name</label>
+                            <input type="text" class="form-control" id="edit-folder-name" placeholder="Enter folder name">
+                        </div>
+                        <div class="form-group">
+                            <label id="edit-folder-color">Select New Folder Color</label>
+                            <div id="edit-color-picker">
+                                <div class="color-option" style="background-color: #FF5733;" data-color="#FF5733"></div>
+                                <div class="color-option" style="background-color: #33FF57;" data-color="#33FF57"></div>
+                                <div class="color-option" style="background-color: #3357FF;" data-color="#3357FF"></div>
+                                <div class="color-option" style="background-color: #FF33A1;" data-color="#FF33A1"></div>
+                                <div class="color-option" style="background-color: #FFFF33;" data-color="#FFFF33"></div>
+                                <div class="color-option" style="background-color: #33FFFF;" data-color="#33FFFF"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="edit-save-folder-btn">Save Folder</button>
                 </div>
             </div>
         </div>
