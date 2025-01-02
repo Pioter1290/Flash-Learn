@@ -33,7 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("add-folder-btn").addEventListener("click", function() {
         $('#folderModal').modal('show');
     });
+    document.getElementById("save-folder-btn").addEventListener("click", function() {
+        var folderName = document.getElementById("folder-name").value;
 
+    });
 
     document.getElementById("save-folder-btn").addEventListener("click", function() {
         var folderName = document.getElementById("folder-name").value;
