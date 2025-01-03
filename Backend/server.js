@@ -150,7 +150,6 @@ app.post('/add-flashcard', (req, res) => {
             return res.status(500).json({ error: "Database error" });
         }
         res.status(201).json({ message: "Flashcard added successfully", flashcardId: data.insertId });
-
     });
 });
 

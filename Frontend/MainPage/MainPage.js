@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error("Nie uzyskano userId.");
             return;
         }
+
         fetch(`http://localhost:8081/folders?userId=${userId}`)
             .then(response => response.json())
             .then(folders => {
@@ -168,13 +169,26 @@ document.addEventListener('DOMContentLoaded', function() {
                     const newFolder = document.createElement("div");
                     newFolder.classList.add("new-folder");
 
+                    // Create the folder's colored rectangle
                     const smallRectangle = document.createElement("div");
                     smallRectangle.classList.add("small-rectangle");
                     smallRectangle.style.backgroundColor = folder.folder_color;
 
-                    newFolder.appendChild(smallRectangle);
-                    newFolder.appendChild(document.createTextNode(folder.folder_name));
+                    // Add the folder's name text
+                    const folderText = document.createElement("div");
+                    folderText.classList.add("folder-text");
+                    folderText.textContent = folder.folder_name;
 
+                    newFolder.appendChild(smallRectangle);
+                    newFolder.appendChild(folderText);
+
+                    // Add click event to each folder
+                    newFolder.addEventListener("click", function() {
+                        localStorage.setItem('selectedFolderId', folder.folder_id);
+                        window.location.href = '../FlashCards/FlashCards.html';
+                    });
+
+                    // Append the new folder element to the content
                     document.getElementById("content").appendChild(newFolder);
                 });
             })
@@ -182,6 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error("Error loading folders:", error);
             });
     }
+
 
     function loadUserFoldersForEdit() {
         var userId = localStorage.getItem('userId');
@@ -228,6 +243,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error("Error loading folders:", error);
             });
     }
+
+
+
 
     loadUserFolders();
 });
