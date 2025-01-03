@@ -12,6 +12,7 @@ body, html {
     display: flex;
     flex-direction: column;
     min-height: 100%;
+
 }
 
 #particles-js {
@@ -38,8 +39,8 @@ header {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center; /* Dodać to */
+    align-items: center;
 }
 
 footer {
@@ -135,15 +136,6 @@ footer {
     color: white;
 }
 
-.color-option {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #969696;
-    display: inline-block;
-    margin: 6px;
-    cursor: pointer;
-    border-radius: 5px;
-}
 
 .color-option:hover {
     opacity: 0.8;
@@ -165,56 +157,65 @@ footer {
 .close-btn{
     background-color: #FF5733;
 }
-.close-btn:hover{
+.close-btn:hover {
     background-color: #bb4429;
 }
-.new-folder {
-    width: 450px;
-    height: 300px;
-    background-color: transparent;
-    backdrop-filter: blur(5px);
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-sizing: border-box;
-    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+
+.flashcard-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.flashcard {
+    display: inline-block;
+    width: 500px;
+    height: 400px;
+    perspective: 1000px;
+}
+
+.flashcard-front,
+.flashcard-back {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    padding-top: 20px;
-    margin: 20px;
-    font-size: 38px;
-    text-align: center;
-    color: #ffffff;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: bold;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-
-}
-.new-folder:hover{
-    box-shadow: 0 0 20px rgba(0, 0, 0, .9);
-    backdrop-filter: blur(1px);
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
-}
-
-.new-folder text{
-    vertical-align: middle;
-
-}
-
-.small-rectangle {
-    height: 40px;
-    width: 100%;
-    background-color: #6e6e6e;
-    border-radius: 10px 10px 0 0;
-    border-bottom: 1px solid #6e6e6e;
-    color: white;
     position: absolute;
-    top: 0;
+    backface-visibility: hidden;
+    transition: transform 0.6s;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .6);
 }
+
+.flashcard-front {
+    background-color: #f8f9fa;
+    color: #000;
+    font-size: 24px;
+}
+
+.flashcard-back {
+    background-color: #ffffff;
+    color: #000;
+    font-size: 24px;
+    transform: rotateY(180deg);
+}
+
+.flashcard-container:hover .flashcard-front {
+    transform: rotateY(180deg);
+}
+
+.flashcard-container:hover .flashcard-back {
+    transform: rotateY(360deg);
+}
+
+.buttons1 {
+    margin-top: 20px;
+}
+.buttons1:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, .6);
+}
+
 
 
 
