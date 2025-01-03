@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log(localStorage.getItem('selectedFolderId'));
+    //console.log(localStorage.getItem('selectedFolderId'));
     const addButton = document.getElementById('add-folder-btn');
     const folderModal = new bootstrap.Modal(document.getElementById('folderModal'));
 
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error("Error:", result.error);
                     alert(result.error);
                 } else {
-                    alert("Flashcard added successfully!");
+
                     folderModal.hide();
                 }
             })
@@ -47,7 +47,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("There was an error adding the flashcard.");
             });
 
-        // Reset the form and close the modal
         document.getElementById('flashcard-form').reset();
+
+
     });
+    document.getElementById('logout-button').addEventListener('click', function() {
+        const confirmLogout = confirm("Czy na pewno chcesz się wylogować?");
+        if (confirmLogout) {
+            sessionStorage.clear();
+            localStorage.clear();
+            window.location.href = '../Login/loginForm.html';
+        } else {
+            console.log("Wylogowanie anulowane.");
+        }
+    });
+    function loadParticlesConfig() {
+        fetch('../Login/particle-cfg.json')
+            .then(response => response.json())
+            .then(config => {
+                particlesJS('particles-js', config);
+            })
+            .catch(error => console.error('Error loading particles config:', error));
+    }
+
+    loadParticlesConfig();
 });
