@@ -102,6 +102,47 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error:', error));
     }
 
+    document.getElementById("edit-save-folder-btn").addEventListener("click", function () {
+        const flashcardId = document.getElementById("editFlashcardSelect").value;
+        const updatedQuestion = document.getElementById("editFlashcardQuestion").value;
+        const updatedAnswer = document.getElementById("editFlashcardAnswer").value;
+
+        if (!flashcardId || !updatedQuestion || !updatedAnswer) {
+            alert("Please select a flashcard and provide both a question and an answer.");
+            return;
+        }
+
+        const data = {
+            flashcardId: flashcardId,
+            question: updatedQuestion,
+            answer: updatedAnswer
+        };
+
+        fetch(`http://localhost:8081/edit-flashcard`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result.error) {
+                    console.error('Error:', result.error);
+                    alert(result.error);
+                } else {
+                    $('#editFlashcard').modal('hide');
+                    alert("Flashcard updated successfully");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("There was an error updating the flashcard.");
+            });
+    });
+
+
+
     document.getElementById("delete-folder-btn").addEventListener("click", function () {
         deleteFlashcard();
     });

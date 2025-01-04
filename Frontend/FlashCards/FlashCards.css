@@ -215,7 +215,12 @@ footer {
 .buttons1:hover{
     box-shadow: 0 0 10px rgba(0, 0, 0, .6);
 }
-
+.btn-secondary{
+    background-color: #FF5733;
+}
+.btn-secondary:hover{
+    background-color: #bb4429;
+}
 
 
 

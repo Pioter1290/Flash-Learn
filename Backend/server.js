@@ -156,7 +156,32 @@ app.post('/add-flashcard', (req, res) => {
         res.status(201).json({ message: "Flashcard added successfully", flashcardId: data.insertId });
     });
 });
+app.post('/edit-flashcard', (req, res) => {
+    console.log("Received flashcard update request:", req.body);
 
+    const { flashcardId, question, answer } = req.body;
+
+    if (!flashcardId || !question || !answer) {
+        return res.status(400).json({ error: "Flashcard ID, question, and answer are required" });
+    }
+
+    const sql = "UPDATE flashcards SET flashcard_question = ?, flashcard_answer = ? WHERE flashcard_id = ?";
+
+    const values = [question, answer, flashcardId];
+
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.error("Error executing query:", err);
+            return res.status(500).json({ error: "Database error" });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Flashcard not found" });
+        }
+
+        res.status(200).json({ message: "Flashcard updated successfully" });
+    });
+});
 app.delete('/delete-flashcard/:id', (req, res) => {
     const flashcardId = req.params.id;
 
