@@ -16,7 +16,7 @@
     <nav>
         <ul class="nav_links">
             <li><a href="../MainPage/MainPage.html"><i class="bi bi-house"></i> Home</a></li>
-            <li><a href="#" id="add-folder-btn"><i class="bi bi-folder-plus"></i> Add Flashcard</a></li>
+            <li><a href="#" id="add-flashcard-btn"><i class="bi bi-folder-plus"></i> Add Flashcard</a></li>
             <li><a href="#" id="edit-folder-btn"><i class="bi bi-pencil-square"></i> Edit Flashcard</a></li>
             <li><a href="#" id="delete-folder-btn"><i class="bi bi-trash3"></i> Delete Flashcard</a></li>
         </ul>
@@ -58,6 +58,61 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="editFlashcard" tabindex="-1" aria-labelledby="editFlashcardModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editFlashcardModalLabel">Edit Flashcard</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <select id="editFlashcardSelect" class="form-control">
+
+                    </select>
+                    <div class="form-group">
+                        <label for="editFlashcardQuestion">Question</label>
+                        <input type="text" class="form-control" id="editFlashcardQuestion" placeholder="Enter your question">
+                    </div>
+                    <div class="form-group">
+                        <label for="editFlashcardAnswer">Answer</label>
+                        <input type="text" class="form-control" id="editFlashcardAnswer" placeholder="Enter the answer">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="edit-save-folder-btn">Save Flashcard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteFlashcard" tabindex="-1" aria-labelledby="deleteFlashcardModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteFlashcardModalLabel">Delete Flashcard</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <select id="deleteFlashcardSelect" class="form-control">
+
+                    </select>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="delete-flashcard">Delete Flashcard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="flashcard-container">
         <div class="flashcard">
             <div id="flashcard-question" class="flashcard-front">

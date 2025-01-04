@@ -169,12 +169,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     const newFolder = document.createElement("div");
                     newFolder.classList.add("new-folder");
 
-                    // Create the folder's colored rectangle
                     const smallRectangle = document.createElement("div");
                     smallRectangle.classList.add("small-rectangle");
                     smallRectangle.style.backgroundColor = folder.folder_color;
 
-                    // Add the folder's name text
                     const folderText = document.createElement("div");
                     folderText.classList.add("folder-text");
                     folderText.textContent = folder.folder_name;
@@ -182,13 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     newFolder.appendChild(smallRectangle);
                     newFolder.appendChild(folderText);
 
-                    // Add click event to each folder
                     newFolder.addEventListener("click", function() {
                         localStorage.setItem('selectedFolderId', folder.folder_id);
                         window.location.href = '../FlashCards/FlashCards.html';
                     });
 
-                    // Append the new folder element to the content
                     document.getElementById("content").appendChild(newFolder);
                 });
             })

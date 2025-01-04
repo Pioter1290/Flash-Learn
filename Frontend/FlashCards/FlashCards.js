@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     //console.log(localStorage.getItem('selectedFolderId'));
-    const addButton = document.getElementById('add-folder-btn');
+    const addButton = document.getElementById('add-flashcard-btn');
     const folderModal = new bootstrap.Modal(document.getElementById('folderModal'));
 
     addButton.addEventListener('click', function() {
@@ -71,4 +71,93 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     loadParticlesConfig();
+
+
+
+    document.getElementById("edit-folder-btn").addEventListener("click", function () {
+        editFlashcard();
+    });
+
+    function editFlashcard() {
+        const folderId = localStorage.getItem('selectedFolderId');
+        if (!folderId) {
+            console.error("No folder ID found in localStorage.");
+            alert("Please select a folder to edit.");
+            return;
+        }
+        fetch(`http://localhost:8081/flashcards?folder_id=${folderId}`)
+            .then(response => response.json())
+            .then(data => {
+                flashcards = data;
+                const editFolderSelect = document.getElementById("editFlashcardSelect");
+                editFolderSelect.innerHTML = '<option value="" disabled selected>Select a flashcard</option>';
+                flashcards.forEach(flashcard => {
+                    const option = document.createElement("option");
+                    option.value = flashcard.flashcard_id;
+                    option.textContent = flashcard.flashcard_question;
+                    editFolderSelect.appendChild(option);
+                });
+                $('#editFlashcard').modal('show');
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    document.getElementById("delete-folder-btn").addEventListener("click", function () {
+        deleteFlashcard();
+    });
+    function deleteFlashcard() {
+        const folderId = localStorage.getItem('selectedFolderId');
+        if (!folderId) {
+            console.error("No folder ID found in localStorage.");
+            alert("Please select a folder to delete flashcards from.");
+            return;
+        }
+
+        fetch(`http://localhost:8081/flashcards?folder_id=${folderId}`)
+            .then(response => response.json())
+            .then(data => {
+                const deleteFolderSelect = document.getElementById("deleteFlashcardSelect");
+                deleteFolderSelect.innerHTML = '<option value="" disabled selected>Select a flashcard</option>';
+                data.forEach(flashcard => {
+                    const option = document.createElement("option");
+                    option.value = flashcard.flashcard_id;
+                    option.textContent = flashcard.flashcard_question;
+                    deleteFolderSelect.appendChild(option);
+                });
+                $('#deleteFlashcard').modal('show');
+            })
+            .catch(error => console.error('Error fetching flashcards:', error));
+    }
+
+    document.getElementById("delete-flashcard").addEventListener("click", function () {
+        const flashcardId = document.getElementById("deleteFlashcardSelect").value;
+
+        if (!flashcardId) {
+            alert("Please select a flashcard to delete.");
+            return;
+        }
+
+        fetch(`http://localhost:8081/delete-flashcard/${flashcardId}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to delete the flashcard.");
+                }
+                return response.json();
+            })
+            .then(result => {
+
+                $('#deleteFlashcard').modal('hide');
+                deleteFlashcard();
+            })
+            .catch(error => {
+                console.error("Error deleting flashcard:", error);
+                alert("Failed to delete the flashcard.");
+            });
+    });
+
+
+
+
 });
