@@ -198,6 +198,20 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 
+    let flashcards = document.querySelectorAll('.flashcard');
+
+    flashcards.forEach(flashcard => {
+        flashcard.addEventListener('click', () => {
+            flashcard.classList.toggle('flipped');
+        });
+    });
+
+
+    const folderId = localStorage.getItem('selectedFolderId');
+    if (!folderId) {
+        console.error("No folder ID found in localStorage.");
+        return;
+    }
 
 
 
