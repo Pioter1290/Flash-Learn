@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
 
                     folderModal.hide();
+                    printFlashcard();
                 }
             })
             .catch(error => {
@@ -207,11 +208,55 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    const folderId = localStorage.getItem('selectedFolderId');
-    if (!folderId) {
-        console.error("No folder ID found in localStorage.");
-        return;
-    }
+        let currentIndex = 0;
+
+        function fetchFlashcards() {
+            const folderId = localStorage.getItem('selectedFolderId');
+            if (!folderId) {
+                console.error("No folder ID found in localStorage.");
+                alert("Please select a folder.");
+                return;
+            }
+
+            fetch(`http://localhost:8081/flashcards?folder_id=${folderId}`)
+                .then(response => response.json())
+                .then(data => {
+                    flashcards = data;
+                    if (flashcards.length > 0) {
+                        currentIndex = 0;
+                        printFlashcard();
+                    } else {
+                        alert("No flashcards found in this folder.");
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function printFlashcard() {
+            if (flashcards.length === 0) {
+                console.error("No flashcards available to display.");
+
+                return;
+            }
+            const flashcard = flashcards[currentIndex];
+            document.getElementById('flashcard-question').textContent = flashcard.flashcard_question;
+            document.getElementById('flashcard-answer').textContent = flashcard.flashcard_answer;
+        }
+
+        document.getElementById("next-btn").addEventListener("click", function() {
+            if (flashcards.length === 0) return;
+            currentIndex = (currentIndex + 1) % flashcards.length;
+            printFlashcard();
+        });
+
+        document.getElementById("prev-btn").addEventListener("click", function() {
+            if (flashcards.length === 0) return;
+            currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+            printFlashcard();
+        });
+
+        fetchFlashcards();
+
 
 
 

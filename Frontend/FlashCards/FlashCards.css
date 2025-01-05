@@ -180,6 +180,7 @@ footer {
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, .5);
 
+
 }
 
 .flashcard.flipped {
@@ -197,7 +198,7 @@ footer {
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, .3);
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 30px;
     background-color: #f0f0f0;
     border: 2px solid rgba(255, 255, 255, 0.5);
 }
