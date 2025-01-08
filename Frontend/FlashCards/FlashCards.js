@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         folderModal.show();
     });
 
+
     const saveButton = document.getElementById('save-folder-btn');
     saveButton.addEventListener('click', function() {
         const question = document.getElementById('flashcardQuestion').value;
